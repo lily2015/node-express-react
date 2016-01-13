@@ -131,17 +131,17 @@ gulp.task('rev', function() {
 
 /* 版本号增加到config.js文件 */
 gulp.task('template', function() {
-  return gulp.src('config/config.src.js')
+  return gulp.src('app/config/config.src.js')
     .pipe(rename('config.js'))
-    .pipe(gulp.dest('config/'));
+    .pipe(gulp.dest('app/config/'));
 });
 
 /* 版本号增加到config.js文件 */
 gulp.task('template_node', function() {
-  return gulp.src('config/config.src.js')
+  return gulp.src('app/config/config.src.js')
     .pipe(template({date_rev: date_rev}))
     .pipe(rename('config.js'))
-    .pipe(gulp.dest('config/'));
+    .pipe(gulp.dest('app/config/'));
 });
 
 /**

@@ -10,48 +10,12 @@ var config = {
     root: rootPath,
     templatePath: templatePath,
     staticPath: staticPath,
-    server: "node.pro.mtime.com",
+    server: 'm.local.cn',
     api_server: require('./localAddress')() + ":4001",
-    css_server: "node.pro.mtime.com",
-    js_server: 'node.pro.mtime.com',
+    css_server: 'm.local.cn',
+    js_server: 'm.local.node.cn',
     img_server: 'img21.mtimeimg.com',
-    domain_site: ".mtime.cn",
-    rev: rev
-  },
-  qa: {
-    root: rootPath,
-    templatePath: templatePath,
-    staticPath: staticPath,
-    server: "node-qa.pro.mtime.com",
-    api_server: "api.pro.mtime.cn",
-    css_server: "static1.pro.mtime.cn",
-    js_server: 'static1.pro.mtime.cn',
-    img_server: 'img21.mtimeimg.com',
-    domain_site: ".mtime.cn",
-    rev: rev
-  },
-  pre: {
-    root: rootPath,
-    templatePath: templatePath,
-    staticPath: staticPath,
-    server: "node.pro.mtime.com",
-    api_server: "api.pro.mtime.cn",
-    css_server: "static1.pro.mtime.cn",
-    js_server: 'static1.pro.mtime.cn',
-    img_server: 'img21.mtimeimg.com',
-    domain_site: ".mtime.cn",
-    rev: rev
-  },
-  prod: {
-    root: rootPath,
-    templatePath: templatePath,
-    staticPath: staticPath,
-    server: "pro.mtime.cn",
-    api_server: "api.pro.mtime.cn",
-    css_server: "static1.mtime.cn/prodata",
-    js_server: 'static1.mtime.cn/prodata',
-    img_server: 'img21.mtimeimg.com',
-    domain_site: ".mtime.cn",
+    domain_site: '.local.cn',
     rev: rev
   }
 };
