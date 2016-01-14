@@ -21,7 +21,11 @@ var gulp = require('gulp')
   , bsmain = require('browser-sync').create('bsmain')
   , bsapi = require('browser-sync').create('bsapi')
   , nodemon = require('gulp-nodemon')
-  , BROWSER_SYNC_RELOAD_DELAY = 500;
+  , BROWSER_SYNC_RELOAD_DELAY = 500
+  , DEV_PORT = 3050
+  , MAIN_PORT = 4050
+  , API_PORT = 4051
+  , API_SERVER = "api.pro.mtime.cn";
 
 var date_rev = new Date()
   , y, m, d, hh, mm, ss;
@@ -130,14 +134,14 @@ gulp.task('rev', function() {
 });
 
 /* 版本号增加到config.js文件 */
-gulp.task('template', function() {
+gulp.task('configsrc', function() {
   return gulp.src('app/config/config.src.js')
     .pipe(rename('config.js'))
     .pipe(gulp.dest('app/config/'));
 });
 
 /* 版本号增加到config.js文件 */
-gulp.task('template_node', function() {
+gulp.task('configsrc_online', function() {
   return gulp.src('app/config/config.src.js')
     .pipe(template({date_rev: date_rev}))
     .pipe(rename('config.js'))
@@ -156,8 +160,13 @@ gulp.task('nodemon', function(cb) {
       // nodemon our expressjs server
       script: 'app.js',
       // watch core server file(s) that require server restart on change
-      watch: ['config/','controllers/','routes/','templates/','app.js'],
-      ext: 'js html'
+      watch: ['app/**/*', 'views/**/*', 'app.js'],
+      ext: 'js ejs',
+      env: {
+        'PORT': DEV_PORT,
+        'MAINPORT': MAIN_PORT,
+        'APIPORT': API_PORT
+      }
     })
     .on('start', function onStart() {
       // ensure start only got called once
@@ -180,8 +189,8 @@ gulp.task('nodemon', function(cb) {
  */
 function initBrowsersyncMain() {
   bsmain.init({
-    port: 4000,
-    proxy: 'node.pro.mtime.com',
+    port: MAIN_PORT,
+    proxy: 'localhost:' + DEV_PORT,
     browser: ['google-chrome']
   });
 }
@@ -189,9 +198,9 @@ function initBrowsersyncMain() {
 function initBrowsersyncApi() {
   bsapi.init({
     ui: false,
-    port: 4001,
+    port: API_PORT,
     proxy: {
-      target: "api.pro.mtime.cn",
+      target: API_SERVER,
       proxyRes: [
         function(res) {
           res.headers["Access-Control-Allow-Origin"] = '*';
@@ -217,16 +226,17 @@ gulp.task('watch', ['browser-sync'], function() {
   gulp.watch(fpath.src + '/components/**/*.js', ['js-watch']);
   gulp.watch(fpath.src + '/merge/**/*.js', ['js-watch']);
   gulp.watch(fpath.src + '/bower_components/**/*', ['bowerjs']);
+  gulp.watch('app/config/config.src.js', ['configsrc'])
 });
 
 /*任务执行*/
 gulp.task('output', ['css', 'images', 'favicon', 'fonts', 'concatScript', 'bowerjs'], function() {
-  gulp.start('template');
+  gulp.start('configsrc');
 });
 
 /*任务执行*/
 gulp.task('output_online', ['css_online', 'images_online', 'favicon', 'fonts', 'concatScript_online', 'bowerjs'], function() {
-  gulp.start('template_node');
+  gulp.start('configsrc_online');
 });
 
 /*清空*/

@@ -1,29 +1,41 @@
 var config = require('./config');
 var log4js = require('log4js');
 var log4js_config = require("../../logs/log4js.json");
-log4js.configure(log4js_config);
+log4js.configure(log4js_config, {
+  cwd: config.logsPath
+});
+// log info 
+var _logApp = log4js.getLogger('logApp');
 
-// log info
-var logInfo = log4js.getLogger('logInfo');
-
-
-module.exports = function (){
+function logApp() {
   var _this = this;
   var port = process.env.PORT || 3050;
-  var env = process.env.NODE_ENV || 'dev';  
+  var env = process.env.NODE_ENV || 'dev';
 
   // logs start info output
-  logInfo.info("pid=" + process.pid + "|env=" + env + "|port=" + port);
+  _logApp.info("pid=" + process.pid + "|env=" + env + "|port=" + port);
 
-  this.logInfo_debug = function(mes){
-    logInfo.debug(mes);
+  this.logApp_debug = function(mes) {
+    _logApp.debug(mes);
   };
-  this.logInfo_info = function(mes){
-    logInfo.info(mes);
+  this.logApp_info = function(mes) {
+    _logApp.info(mes);
   };
-  this.logInfo_error = function(mes){
-    logInfo.error(mes);
+  this.logApp_error = function(mes) {
+    _logApp.error(mes);
   };
+}
 
+// log connect
+var _logDaily = log4js.getLogger('logDaily');
+
+function logDaily() {
+  return log4js.connectLogger(_logDaily, {
+    level: 'auto'
+  });
+}
+
+module.exports = {
+  logApp: logApp,
+  logDaily: logDaily
 };
-

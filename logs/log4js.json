@@ -6,10 +6,17 @@
     }, 
     {
       "type": "file", 
-      "filename": "logs/logInfo.log", 
+      "filename": "app.log", 
       "maxLogSize": 10240,
       "backups": 10,
-      "category": "logInfo"
+      "category": "logApp"
+    },
+    {
+      "type": "file", 
+      "filename": "daily.log", 
+      "maxLogSize": 10240,
+      "backups": 10,
+      "category": "logDaily"
     }
   ],
   "replaceConsole": true,

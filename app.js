@@ -18,7 +18,7 @@ var app = express();
 require('./app/config/express')(app, config);
 
 // logs
-require('./app/config/logs')(app);
+require('./app/config/logs').logApp(app);
 
 var env = process.env.NODE_ENV || 'dev';
 
