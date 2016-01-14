@@ -1,9 +1,9 @@
 var path = require('path');
 var rootPath = path.normalize(__dirname + '/..');
-var templatePath = path.normalize(__dirname + '/../templates');
+var templatePath = path.normalize(__dirname + '/../../views');
 var rev = '<%= date_rev %>';
 rev = rev.indexOf('%') < 0 ? '/' + rev : '';
-var staticPath = path.normalize(__dirname + '/../dist');
+var staticPath = path.normalize(__dirname + '/../../public');
 
 var ipAddress = require('./localAddress')();
 var mainport = process.env.MAINPORT || '4050';

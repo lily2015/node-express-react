@@ -8,17 +8,11 @@ var bodyParser = require('body-parser');
 // var template = require('./template');
 
 module.exports = function (app, config) {
-  //artTemplate 模板
- /*  template.config('base', '');
-  template.config('extname', '.html');
-  app.engine('.html', template.__express);
-  app.set('view engine', 'html');
-  app.set('views', config.templatePath);*/
   
   //ejs 模板
+  app.set('view engine', 'ejs');
   app.engine('.html', require('ejs').__express);
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'html');
+  app.set('views', config.templatePath);
 
   app.use(express.static(config.staticPath));
   app.use(logger('dev'));
