@@ -116,7 +116,7 @@ gulp.task('concatScript_online', function() {
     .pipe(plumber())
     .pipe(concatScript({relativeUrls: fpath.src}))
     .pipe(uglify({preserveComments: 'some'}))
-  .pipe(gulp.dest(fpath.dest + '/' + date_rev + '/js/'))
+    .pipe(gulp.dest(fpath.dest + '/' + date_rev + '/js/'))
 });
 /*线上压缩图片*/
 gulp.task('images_online', function() {
