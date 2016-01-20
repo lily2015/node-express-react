@@ -1,7 +1,7 @@
 var React = require('react')
   , ReactDOMServer = require('react-dom/server')
   , config = require('../../config/config')
-  , Loader = React.createFactory(require("../../react/index/demo"));
+  , indexOutput = require("../../react/build/index/index-reactOutput");
 
 // index page
 exports.index = function(req, res, next) {
@@ -9,6 +9,6 @@ exports.index = function(req, res, next) {
     "config": config,
     "title": "商城首页"
   };
-  var reactHtml = ReactDOMServer.renderToString(React.createElement('h1', null, 'Hello, world!!'));
+  var reactHtml = ReactDOMServer.renderToString(React.createElement(indexOutput, null));
   res.render('index', {reactOutput: reactHtml, docInfo: docInfo});
 }
