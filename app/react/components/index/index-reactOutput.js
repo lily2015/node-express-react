@@ -1,6 +1,9 @@
 var React = require('react')
   , ReactDOMServer = require('react-dom/server');
 
+var BoxOfficeTitle = require('./elements/index-ele-item1')
+  , BoxOfficeDateChoose = require('./elements/index-ele-item2');
+
 var FilmTicketBox = React.createClass({
   render: function () {
     return (

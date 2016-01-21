@@ -1,3 +1,6 @@
+var React = require('react')
+  , ReactDOMServer = require('react-dom/server');
+
 var BoxOfficeDateChoose = React.createClass({
   render: function (){
     return (
@@ -20,3 +23,5 @@ var BoxOfficeDateChoose = React.createClass({
     );
   }
 });
+
+module.exports = BoxOfficeDateChoose;

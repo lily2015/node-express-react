@@ -101,12 +101,12 @@ gulp.task('concatScript', function() {
 });
 
 /*合并、压缩script*/
-gulp.task('concatReact', function() {
-  return gulp.src('app/react/merge/**/*.js')
-    .pipe(plumber())
-    .pipe(concatScript({relativeUrls: 'app/react/components'}))
-    .pipe(gulp.dest('app/react/concat'))
-});
+// gulp.task('concatReact', function() {
+//   return gulp.src('app/react/merge/**/*.js')
+//     .pipe(plumber())
+//     .pipe(concatScript({relativeUrls: 'app/react/components'}))
+//     .pipe(gulp.dest('app/react/concat'))
+// });
 
 /*线上css文件生成*/
 gulp.task('css_online', function() {
@@ -238,12 +238,12 @@ gulp.task('watch', ['browser-sync'], function() {
 });
 
 /*任务执行*/
-gulp.task('output', ['css', 'images', 'favicon', 'fonts', 'concatScript', 'bowerjs', 'concatReact'], function() {
+gulp.task('output', ['css', 'images', 'favicon', 'fonts', 'concatScript', 'bowerjs'], function() {
   gulp.start('configsrc');
 });
 
 /*任务执行*/
-gulp.task('output_online', ['css_online', 'images_online', 'favicon', 'fonts', 'concatScript_online', 'bowerjs', 'concatReact'], function() {
+gulp.task('output_online', ['css_online', 'images_online', 'favicon', 'fonts', 'concatScript_online', 'bowerjs'], function() {
   gulp.start('configsrc_online');
 });
 
