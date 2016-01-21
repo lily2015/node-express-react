@@ -10,5 +10,10 @@ exports.index = function(req, res, next) {
     "title": "商城首页"
   };
   var reactHtml = ReactDOMServer.renderToString(React.createElement(indexOutput, null));
-  res.render('index', {reactOutput: reactHtml, docInfo: docInfo});
+  var reactHtml2 = ReactDOMServer.renderToString(React.createElement('h1', null, 'part2'));
+  res.render('index', {
+    docInfo: docInfo,
+    reactOutput: reactHtml,
+    reactOutput2: reactHtml2
+  });
 }
