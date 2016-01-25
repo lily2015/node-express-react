@@ -61,5 +61,8 @@
     "transform": [
       "reactify"
     ]
+  },
+  "devDependencies": {
+    "gulp-util": "^3.0.7"
   }
 }
