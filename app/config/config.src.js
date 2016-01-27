@@ -14,7 +14,7 @@ var config = {
   dev: {
     root: rootPath,
     templatePath: templatePath,
-    staticPath: staticPath, 
+    staticPath: staticPath,
     logsPath: "logs/",
     server: devServer,
     api_server: ipAddress + ":" + apiport,

@@ -3,6 +3,7 @@
  * @version [beta 1.0.0]
  */
 var gulp = require('gulp')
+  , react = require('gulp-react')
   , uglify = require('gulp-uglify')
   , sass = require('gulp-sass')
   , minifycss = require('gulp-minify-css')
@@ -25,7 +26,7 @@ var gulp = require('gulp')
   , DEV_PORT = 3050
   , MAIN_PORT = 4050
   , API_PORT = 4051
-  , API_SERVER = "api.pro.mtime.cn";
+  , API_SERVER = "m.mtime.cn";
 
 var date_rev = new Date()
   , y, m, d, hh, mm, ss;
@@ -100,13 +101,12 @@ gulp.task('concatScript', function() {
     .pipe(gulp.dest(fpath.dest + '/js'))
 });
 
-/*合并、压缩script*/
-// gulp.task('concatReact', function() {
-//   return gulp.src('app/react/merge/**/*.js')
-//     .pipe(plumber())
-//     .pipe(concatScript({relativeUrls: 'app/react/components'}))
-//     .pipe(gulp.dest('app/react/concat'))
-// });
+/* build */
+gulp.task('build', function(){
+  return gulp.src('app/react/components/**/*.js')
+    .pipe(react())
+    .pipe(gulp.dest('app/react/build'));
+});
 
 /*线上css文件生成*/
 gulp.task('css_online', function() {
@@ -132,6 +132,14 @@ gulp.task('images_online', function() {
     .pipe(plumber())
     .pipe(cache(imagemin({optimizationLevel:3, progressive:true, interlaced:true})))
     .pipe(gulp.dest(fpath.dest + '/' + date_rev + '/images/'));
+});
+
+/*线上图标*/
+gulp.task('favicon_online', function() {
+  return gulp.src(fpath.src + '/favicon/**/')
+    .pipe(plumber())
+    .pipe(cache(imagemin({optimizationLevel:3, progressive:true, interlaced:true})))
+    .pipe(gulp.dest(fpath.dest + '/' + date_rev + '/favicon'));
 });
 
 /*改变版本号*/
@@ -168,7 +176,7 @@ gulp.task('nodemon', function(cb) {
       // nodemon our expressjs server
       script: 'app.js',
       // watch core server file(s) that require server restart on change
-      watch: ['app/**/*', 'views/**/*', 'app.js'],
+      watch: ['app/**/*', 'static/**/*', 'utils/**/*', 'app.js'],
       ext: 'js ejs',
       env: {
         'PORT': DEV_PORT,
@@ -228,22 +236,23 @@ gulp.task('js-watch', ['concatScript'], function() {
 
 /*文件改动监听*/
 gulp.task('watch', ['browser-sync'], function() {
-  gulp.watch(fpath.src + '/css/**/*.{sass,scss}', ['css']);
+  gulp.watch(fpath.src + '/scss/**/*.{sass,scss}', ['css']);
   gulp.watch(fpath.src + '/images/**/', ['images']);
   gulp.watch(fpath.src + '/fonts/**/*', ['fonts']);
   gulp.watch(fpath.src + '/components/**/*.js', ['js-watch']);
   gulp.watch(fpath.src + '/merge/**/*.js', ['js-watch']);
   gulp.watch(fpath.src + '/bower_components/**/*', ['bowerjs']);
+  gulp.watch('app/react/components/**/*.js', ['build']);
   gulp.watch('app/config/config.src.js', ['configsrc'])
 });
 
 /*任务执行*/
-gulp.task('output', ['css', 'images', 'favicon', 'fonts', 'concatScript', 'bowerjs'], function() {
+gulp.task('output', ['css', 'images', 'favicon', 'fonts', 'concatScript', 'bowerjs', 'build'], function() {
   gulp.start('configsrc');
 });
 
 /*任务执行*/
-gulp.task('output_online', ['css_online', 'images_online', 'favicon', 'fonts', 'concatScript_online', 'bowerjs'], function() {
+gulp.task('output_online', ['css_online', 'images_online', 'favicon_online', 'fonts', 'concatScript_online', 'bowerjs', 'build'], function() {
   gulp.start('configsrc_online');
 });
 

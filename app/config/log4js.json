@@ -7,14 +7,14 @@
     {
       "type": "file", 
       "filename": "app.log", 
-      "maxLogSize": 10240,
+      "maxLogSize": 30720,
       "backups": 10,
       "category": "logApp"
     },
     {
       "type": "file", 
       "filename": "daily.log", 
-      "maxLogSize": 10240,
+      "maxLogSize": 61440,
       "backups": 10,
       "category": "logDaily"
     }

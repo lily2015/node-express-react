@@ -1,26 +1,40 @@
-var request = require('request');
-var logs = require('../../config/logs').logApp;
-var config = require('../../config/config');
-
-var logger = new logs();
+var rq = require('request-promise')
+  , config = require('../../config/config')
+  , loggerDaily = require('../../config/logs').loggerDaily;
 
 module.exports = function(paramsObj) {
   var baseUrl = 'http://' + config.api_server;
   var options = {
+    method: 'GET',
     baseUrl: paramsObj.baseUrl || baseUrl,
     uri: paramsObj.apiName,
-    qs: paramsObj.apiParams || {}
+    qs: paramsObj.apiParams || {},
+    json: paramsObj.json || true,
+    headers: paramsObj.headers || {}
   };
 
-  this.getAjax = function(callback) {
-    request(options, function(err, res, body) {
-      var _date = JSON.parse(body);
-      _date.config = config;
-      if (!err && res.statusCode == 200) {
-        callback(_date);
-      } else {
-        logger.logApp_error(err);
-      };
-    });
+  this._rq = function(cb) {
+    var _this = this;
+    rq(options)
+      .then(function(res){
+        res.config = config;
+        cb(res);
+        _this._then(res);
+        loggerDaily.info(options);
+      })
+      .catch(function(err){
+        _this._err(err);
+        console.log(err);
+        loggerDaily.error(err);
+      })
   };
-}
+
+  this._then = function(res){
+    
+  };
+
+  this._err = function(err){
+    
+  };
+
+};
