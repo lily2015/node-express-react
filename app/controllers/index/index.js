@@ -33,13 +33,17 @@ exports.index = function(app, io){
     params_mall_list.apiName = 'Service/callback.mi/ECommerce/RecommendProducts.api';
     params_mall_list.apiParams = {};
     var res_mall_list = new rq(params_mall_list);
-    io.on('connection', function(socket){
-      socket.on('more list', function(params){
+    io.sockets.on('connection', function(socket){
+      /*socket.on('more list', function(params){
         params_mall_list.apiParams = params;
         res_mall_list._rq(function(d_mall_list){
           var reactMallList = ReactDOMServer.renderToString(React.createElement(FilmTicketBox, {data: d_mall_list}));
         });
         io.emit('more list', 'reactMallList');
+      });*/
+      socket.emit('news', { hello: 'world' });
+      socket.on('my other event', function (data) {
+        console.log(data);
       });
     });
   });

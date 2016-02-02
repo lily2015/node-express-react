@@ -40,7 +40,13 @@
    <script src="http://<%= docInfo.config.css_server %><%= docInfo.config.rev %>/js/common/common.js"></script>
 
     <script>
-    var socket = io();
+    var socket = io.connect();
+    socket.on('news', function (data) {
+      console.log(88)
+      console.log(data);
+      socket.emit('my other event', { my: 'data' });
+    });
+    /*var socket = io();
 
     !function(){
       $("#name").on('click', function(e){
@@ -51,7 +57,7 @@
         console.log(cb)
         $('#name').append($('<a>').text(cb));
       });  
-    }();
+    }();*/
     </script>
 </body>
 </html>
