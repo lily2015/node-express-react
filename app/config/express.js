@@ -1,13 +1,13 @@
 /**
  * Module dependencies.
  */
-var express = require('express');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var express = require('express')
+  , logger = require('morgan')
+  , cookieParser = require('cookie-parser')
+  , bodyParser = require('body-parser');
 // var template = require('./template');
 
-module.exports = function (app, config) {
+module.exports = function (app, config, io) {
   
   //ejs 模板
   app.set('view engine', 'ejs');
@@ -22,6 +22,9 @@ module.exports = function (app, config) {
 
   //router config
   require('./routes')(app);
+
+  // io
+  require('./io')(app, io);
 
   // catch 404 and forward to error handler
   app.use(function(req, res, next) {
