@@ -45,6 +45,7 @@
       console.log(88)
       console.log(data);
       socket.emit('my other event', { my: 'data' });
+      $('#name').html($('<a>').text(data.hello)).css("color", "red");
     });
     /*var socket = io();
 
