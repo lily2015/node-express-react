@@ -38,22 +38,7 @@
     -->
 
    <script src="http://<%= docInfo.config.css_server %><%= docInfo.config.rev %>/js/common/common.js"></script>
-
-    <script>
-    !function(){
-      $("#example").on('click', function(){
-        $.ajax({
-          url: '/mall/api/MarketFirstPageNew',
-          data: {},
-          success: function(data){
-            if(data){  
-                $("#example").html(data);
-            }
-          }
-        })
-      })
-    }();
-    </script>
+   <script src="http://<%= docInfo.config.css_server %><%= docInfo.config.rev %>/js/index.js"></script>
 </body>
 </html>
 

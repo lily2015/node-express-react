@@ -1,0 +1,1 @@
+document.write('<script src="/components/index.js"></script>');
