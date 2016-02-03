@@ -41,17 +41,18 @@
 
     <script>
     !function(){
-      var socket = io.connect();
-      socket.on('news', function (data) {
-        console.log(88)
-        console.log(data);
-        socket.emit('my other event', { my: 'data' });
-        $("#name").on('click', function(e){
-          $('#name').html(data.dat).css("color", "red");
-        });
-      });
-    }();    
-
+      $("#example").on('click', function(){
+        $.ajax({
+          url: '/mall/api/MarketFirstPageNew',
+          data: {},
+          success: function(data){
+            if(data){  
+                $("#example").html(data);
+            }
+          }
+        })
+      })
+    }();
     </script>
 </body>
 </html>

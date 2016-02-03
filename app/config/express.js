@@ -7,7 +7,7 @@ var express = require('express')
   , bodyParser = require('body-parser');
 // var template = require('./template');
 
-module.exports = function (app, config, io) {
+module.exports = function (app, config) {
   
   //ejs 模板
   app.set('view engine', 'ejs');
@@ -22,9 +22,6 @@ module.exports = function (app, config, io) {
 
   //router config
   require('./routes')(app);
-
-  // io
-  require('./io')(app, io);
 
   // catch 404 and forward to error handler
   app.use(function(req, res, next) {

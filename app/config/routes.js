@@ -1,6 +1,7 @@
 var indexRouters = require('../routes/index')
   , searchRouters = require('../routes/search')
-  , detailRouters = require('../routes/detail');
+  , detailRouters = require('../routes/detail')
+  , apiRouters = require('../routes/api');
 
 
 module.exports = function(app) {
@@ -10,7 +11,10 @@ module.exports = function(app) {
   // 搜索相关页面
   app.use('/mall/search', searchRouters);
 
-  // 商品详情页相关页面
+  // 商品详情页相关页面 
   app.use('/mall/detail', detailRouters);
+
+  // API
+  app.use('/mall/api', apiRouters);
 
 }

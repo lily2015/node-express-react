@@ -9,7 +9,7 @@ var FilmTicketBox = React.createClass({
     return (
       <div>
         <BoxOfficeTitle />
-        <div id="name">{this.props.data.config.root}</div>
+        <div id="example">{this.props.data.config.root}</div>
         <div className = "index_tab">
           <BoxOfficeDateChoose />
         </div>
