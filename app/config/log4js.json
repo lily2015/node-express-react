@@ -5,15 +5,19 @@
       "category": "console"
     }, 
     {
-      "type": "file", 
-      "filename": "app.log", 
+      "type": "dateFile", 
+      "filename": "app",
+      "pattern": "-yyyyMMddhh.log",
+      "alwaysIncludePattern": true, 
       "maxLogSize": 30720,
       "backups": 10,
       "category": "logApp"
     },
     {
-      "type": "file", 
-      "filename": "daily.log", 
+      "type": "dateFile", 
+      "filename": "daily",
+      "pattern": "-yyyyMMddhh.log",
+      "alwaysIncludePattern": true,
       "maxLogSize": 61440,
       "backups": 10,
       "category": "logDaily"
