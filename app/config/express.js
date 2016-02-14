@@ -5,10 +5,8 @@ var express = require('express')
   , logger = require('morgan')
   , cookieParser = require('cookie-parser')
   , bodyParser = require('body-parser');
-// var template = require('./template');
 
 module.exports = function (app, config) {
-  
   //ejs 模板
   app.set('view engine', 'ejs');
   app.engine('.html', require('ejs').__express);
