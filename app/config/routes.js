@@ -1,10 +1,17 @@
 var indexRouters = require('../routes/index')
   , searchRouters = require('../routes/search')
   , detailRouters = require('../routes/detail')
-  , apiRouters = require('../routes/api');
+  , apiRouters = require('../routes/api')
+  , loggerApp = require('./logs').loggerApp;
 
 
 module.exports = function(app) {
+  // Root
+  app.get('/', function(req, res){
+    console.log('path should be add "/mall"');
+    loggerApp.warn('path should be add "/mall"');
+  });
+
   // 商城首页
   app.use('/mall', indexRouters);
 

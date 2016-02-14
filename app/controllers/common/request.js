@@ -20,10 +20,14 @@ module.exports = function(paramsObj) {
         res.config = config;
         cb(res);
         _this._then(res);
+
+        // logs
         loggerDaily.info(options);
       })
       .catch(function(err){
         _this._err(err);
+
+        // logs
         console.log(err);
         loggerDaily.error(err);
       })
